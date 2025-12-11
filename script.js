@@ -103,6 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const newLang = currentLang === 'es' ? 'en' : 'es';
         setLanguage(newLang);
     });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    }
 });
 
 function setLanguage(lang) {
