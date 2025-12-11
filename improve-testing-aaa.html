@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improve testing with AAA | Aldaspace</title>
+  <meta name="description"
+    content="Learn how to write better tests using the Arrange-Act-Assert (AAA) pattern for clearer and more maintainable code.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        AldaSpace<span>.</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="#" data-i18n="nav.about">Sobre mí</a></li>
+          <li><a href="#" data-i18n="nav.portfolio">Portfolio</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contacto</a></li>
+          <li><button id="lang-toggle" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;"
+              data-i18n="btn.lang">EN</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <article class="post-article">
+      <!-- Article Header -->
+      <article class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
+
+        <!-- Article Header -->
+        <header class="article-header">
+          <div
+            style="margin-bottom: 1rem; color: var(--color-brand-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"
+            data-i18n="meta.testing">
+            Testing</div>
+          <h1 data-i18n="aaa_title">Improve testing with AAA</h1>
+          <div style="color: var(--color-text-subtle); font-size: 0.95rem;">
+            <span data-i18n="article.author_by">By</span> <strong>David Alonso</strong> • <span>Jun 29,
+              2023</span> • <span>10 <span data-i18n="post.read_time">min read</span></span>
+          </div>
+        </header>
+
+        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1200&auto=format&fit=crop"
+          alt="Article Cover" class="responsive-img">
+
+        <div class="article-body" data-lang="en">
+          <!-- English Content -->
+          <p>A test is a procedure that assesses a behavior to determine if it is functioning correctly. Some of
+            the most common types of tests include unit tests, integration tests, and end-to-end tests. However,
+            they all serve the same basic purpose: to test something and report whether it is a success or a
+            failure.</p>
+          <p>With testing, we gain awareness of when something goes wrong. Without testing, coding can become
+            risky. Testing establishes a feedback loop for development, safeguarding us from changes that could
+            potentially harm our business.</p>
+          <p>Given the immense value of tests, is there a way to write high-quality tests? Or is basic testing
+            sufficient? Well, the choice should always be to aim for the best possible. In testing, there is a
+            simple yet effective rule or pattern to follow, known as <strong>Arrange-Act-Assert </strong>(AAA)
+          </p>
+          <h3 id="arrange">Arrange</h3>
+          <p>Consider what inputs are required for the behavior we want to test and establish the objectives for
+            it. Organizing these steps sets up the test case. In this phase, we need to prepare everything that
+            the behavior relies on for the process. For example, if the test requires a specific object or
+            configuration, if it needs a database with simulated data, or if it depends on external services,
+            all of these operations must be handled at the start of the test.</p>
+          <h3 id="act">Act</h3>
+          <p>With everything properly configured for this case, the next step is to act on the target behavior.
+            The actions taken should focus on the main aspect that needs to be tested. This might involve
+            calling a function or method, making a REST API call, or interacting with a web page. The Subject
+            Under Test (SUT) typically comes into play during this step. It represents what we are testing, and
+            it is always clear who the inputs are intended for in the Arrange step.</p>
+          <h3 id="assert">Assert </h3>
+          <p>Finally, we have the expected results. In this step, we evaluate the success or failure of the
+            actions taken in the Act step. Sometimes, assertions can be as straightforward as checking numeric
+            or string values. Other times, they may involve assessing various facets of a system. At this point,
+            the test culminates in determining whether it passed or failed.</p>
+          <h3 id="example">Example</h3>
+          <p>Let's illustrate this pattern with an example:<br><br>We'll use Javascript as the programming
+            language due to its popularity, and for testing, we'll choose a fun testing framework.<br><br>Now,
+            let's imagine we have a function that we want to test.</p>
+          <pre><code class="language-javascript">function serializeData(userData) {
+  return {
+  	name: userData.name,
+    age: userData.age,
+    workingExperience: userData.lastJob['finishDate'] - userData.firstJob['startDate'],
+    lastJobName: userData.lastJob['companyName']
+  };
+}</code></pre>
+          <p>And if we want to test this functionality using the Assert-Act-Arrange (AAA) pattern, we could do the
+            following:</p>
+          <pre><code class="language-javascript">const { serializeData as sut } = require('./serializeData');
+
+test('serializeData should serialize user data correctly', () =&gt; {
+  // Arrange
+  const input = {
+    name: 'John Doe',
+    age: 30,
+    email: 'johndoe@example.com',
+    firstJob: {
+      startDate: new Date('2020-01-01'),
+      finishDate: new Date('2021-01-01'),
+      companyName: 'Company A'
+    },
+    middleJob: {
+      startDate: new Date('2021-01-01'),
+      finishDate: new Date('2022-01-01'),
+      companyName: 'Company B'
+    },
+    lastJob: {
+      startDate: new Date('2022-01-01'),
+      finishDate: new Date('2023-01-01'),
+      companyName: 'Company C'
+    }
+  };
+
+  // Act
+  const serializedData = sut(userData);
+
+  // Assert
+  expect(serializedData).toEqual({
+    name: 'John Doe',
+    age: 30,
+    workingExperience: 94694400000,
+    lastJobName: 'Company C'
+  });
+});</code></pre>
+          <p>With this pattern it is very clear what is being evaluated, the input data and the output data.</p>
+          <h3 id="recommendationadvice">Recommendation/Advice</h3>
+          <p>There are other aspects of testing that we could add to this example, but perhaps another post will
+            be more precise. For now, I want to give a recommendation for this type of testing, that for example
+            we want to demonstrate in that function that regardless of the input data we use, the expected
+            result is clear and should not change for any reason. Therefore, we can use faker to generate the
+            test input data to do so. </p>
+          <p>Then the test will be something like this:</p>
+          <pre><code class="language-javascript">const faker = require('faker');
+const { serializeData as sut } = require('./serializeData');
+
+test('serializeData should serialize user data correctly', () =&gt; {
+  // Arrange
+  	const fakeUserName = faker.name.firstName();
+    const fakeAge = faker.random.number({ min: 18, max: 60 })
+    const fakeCompanyName = faker.company.companyName();
+    const fakeFirstJobStartDate = faker.date.past();
+    const fakeLastJobFinishDate = faker.date.recent();
+    
+    const userData = {
+    name: fakeUserName,
+    age: fakeAge,
+    email: faker.internet.email(),
+    firstJob: {
+      startDate: fakeFirstJobStartDate,
+      finishDate: faker.date.past(),
+      companyName: faker.company.companyName()
+    },
+    middleJob: {
+      startDate: faker.date.past(),
+      finishDate: faker.date.past(),
+      companyName: faker.company.companyName()
+    },
+    lastJob: {
+      startDate: faker.date.past(),
+      finishDate: fakeLastJobFinishDate,
+      companyName: fakeCompanyName
+    }
+  };
+
+  // Act
+  const serializedData = sut(userData);
+
+  // Assert
+  const expectedWorkingExperience = fakeLastJobFinishDate - fakeFirstJobStartDate
+  const expectedSerializedData = {
+    name: fakeUserName,
+    age: fakeAge,
+    workingExperience: expectedWorkingExperience,
+    actualJobName: fakeCompanyName
+  };
+
+  expect(serializedData).toEqual(expectedSerializedData);
+});</code></pre>
+          <p>Because the data generated by faker is random, the test results should vary each time it is run.
+            However, the structure of the test and the validation of the results remain consistent.</p>
+          <h3 id="conclusion">Conclusion</h3>
+          <p>The main idea behind this entire post is for those who wish to enhance the way tests are written and
+            provide clarity and better comprehension to other developers who will review our code. The
+            Arrange-Act-Assert pattern is advantageous because it encourages more structured, readable,
+            maintainable, and effective testing. Adhering to this pattern establishes a sturdy foundation for
+            creating and executing unit and integration tests, which in turn contribute to ensuring software
+            quality and reliability.</p>
+        </div>
+
+        <div class="article-body" data-lang="es" style="display: none;">
+          <!-- Spanish Content -->
+          <blockquote class="info-quote">
+            <p>Este artículo solo está disponible en Inglés actualmente.</p>
+          </blockquote>
+          <p>A test is a procedure that assesses a behavior to determine if it is functioning correctly. Some of
+            the most common types of tests include unit tests, integration tests, and end-to-end tests. However,
+            they all serve the same basic purpose: to test something and report whether it is a success or a
+            failure.</p>
+          <p>With testing, we gain awareness of when something goes wrong. Without testing, coding can become
+            risky. Testing establishes a feedback loop for development, safeguarding us from changes that could
+            potentially harm our business.</p>
+          <p>Given the immense value of tests, is there a way to write high-quality tests? Or is basic testing
+            sufficient? Well, the choice should always be to aim for the best possible. In testing, there is a
+            simple yet effective rule or pattern to follow, known as <strong>Arrange-Act-Assert </strong>(AAA)
+          </p>
+          <h3 id="arrange">Arrange</h3>
+          <p>Consider what inputs are required for the behavior we want to test and establish the objectives for
+            it. Organizing these steps sets up the test case. In this phase, we need to prepare everything that
+            the behavior relies on for the process. For example, if the test requires a specific object or
+            configuration, if it needs a database with simulated data, or if it depends on external services,
+            all of these operations must be handled at the start of the test.</p>
+          <h3 id="act">Act</h3>
+          <p>With everything properly configured for this case, the next step is to act on the target behavior.
+            The actions taken should focus on the main aspect that needs to be tested. This might involve
+            calling a function or method, making a REST API call, or interacting with a web page. The Subject
+            Under Test (SUT) typically comes into play during this step. It represents what we are testing, and
+            it is always clear who the inputs are intended for in the Arrange step.</p>
+          <h3 id="assert">Assert </h3>
+          <p>Finally, we have the expected results. In this step, we evaluate the success or failure of the
+            actions taken in the Act step. Sometimes, assertions can be as straightforward as checking numeric
+            or string values. Other times, they may involve assessing various facets of a system. At this point,
+            the test culminates in determining whether it passed or failed.</p>
+          <h3 id="example">Example</h3>
+          <p>Let's illustrate this pattern with an example:<br><br>We'll use Javascript as the programming
+            language due to its popularity, and for testing, we'll choose a fun testing framework.<br><br>Now,
+            let's imagine we have a function that we want to test.</p>
+          <pre><code class="language-javascript">function serializeData(userData) {
+  return {
+  	name: userData.name,
+    age: userData.age,
+    workingExperience: userData.lastJob['finishDate'] - userData.firstJob['startDate'],
+    lastJobName: userData.lastJob['companyName']
+  };
+}</code></pre>
+          <p>And if we want to test this functionality using the Assert-Act-Arrange (AAA) pattern, we could do the
+            following:</p>
+          <pre><code class="language-javascript">const { serializeData as sut } = require('./serializeData');
+
+test('serializeData should serialize user data correctly', () =&gt; {
+  // Arrange
+  const input = {
+    name: 'John Doe',
+    age: 30,
+    email: 'johndoe@example.com',
+    firstJob: {
+      startDate: new Date('2020-01-01'),
+      finishDate: new Date('2021-01-01'),
+      companyName: 'Company A'
+    },
+    middleJob: {
+      startDate: new Date('2021-01-01'),
+      finishDate: new Date('2022-01-01'),
+      companyName: 'Company B'
+    },
+    lastJob: {
+      startDate: new Date('2022-01-01'),
+      finishDate: new Date('2023-01-01'),
+      companyName: 'Company C'
+    }
+  };
+
+  // Act
+  const serializedData = sut(userData);
+
+  // Assert
+  expect(serializedData).toEqual({
+    name: 'John Doe',
+    age: 30,
+    workingExperience: 94694400000,
+    lastJobName: 'Company C'
+  });
+});</code></pre>
+          <p>With this pattern it is very clear what is being evaluated, the input data and the output data.</p>
+          <h3 id="recommendationadvice">Recommendation/Advice</h3>
+          <p>There are other aspects of testing that we could add to this example, but perhaps another post will
+            be more precise. For now, I want to give a recommendation for this type of testing, that for example
+            we want to demonstrate in that function that regardless of the input data we use, the expected
+            result is clear and should not change for any reason. Therefore, we can use faker to generate the
+            test input data to do so. </p>
+          <p>Then the test will be something like this:</p>
+          <pre><code class="language-javascript">const faker = require('faker');
+const { serializeData as sut } = require('./serializeData');
+
+test('serializeData should serialize user data correctly', () =&gt; {
+  // Arrange
+  	const fakeUserName = faker.name.firstName();
+    const fakeAge = faker.random.number({ min: 18, max: 60 })
+    const fakeCompanyName = faker.company.companyName();
+    const fakeFirstJobStartDate = faker.date.past();
+    const fakeLastJobFinishDate = faker.date.recent();
+    
+    const userData = {
+    name: fakeUserName,
+    age: fakeAge,
+    email: faker.internet.email(),
+    firstJob: {
+      startDate: fakeFirstJobStartDate,
+      finishDate: faker.date.past(),
+      companyName: faker.company.companyName()
+    },
+    middleJob: {
+      startDate: faker.date.past(),
+      finishDate: faker.date.past(),
+      companyName: faker.company.companyName()
+    },
+    lastJob: {
+      startDate: faker.date.past(),
+      finishDate: fakeLastJobFinishDate,
+      companyName: fakeCompanyName
+    }
+  };
+
+  // Act
+  const serializedData = sut(userData);
+
+  // Assert
+  const expectedWorkingExperience = fakeLastJobFinishDate - fakeFirstJobStartDate
+  const expectedSerializedData = {
+    name: fakeUserName,
+    age: fakeAge,
+    workingExperience: expectedWorkingExperience,
+    actualJobName: fakeCompanyName
+  };
+
+  expect(serializedData).toEqual(expectedSerializedData);
+});</code></pre>
+          <p>Because the data generated by faker is random, the test results should vary each time it is run.
+            However, the structure of the test and the validation of the results remain consistent.</p>
+          <h3 id="conclusion">Conclusion</h3>
+          <p>The main idea behind this entire post is for those who wish to enhance the way tests are written and
+            provide clarity and better comprehension to other developers who will review our code. The
+            Arrange-Act-Assert pattern is advantageous because it encourages more structured, readable,
+            maintainable, and effective testing. Adhering to this pattern establishes a sturdy foundation for
+            creating and executing unit and integration tests, which in turn contribute to ensuring software
+            quality and reliability.</p>
+        </div>
+
+        <!-- Author Bio -->
+        <div class="author-bio">
+          <img src="https://ui-avatars.com/api/?name=David+Alonso&background=6366f1&color=fff" alt="David Alonso"
+            class="author-avatar">
+          <div>
+            <h4 style="margin-bottom: 0.5rem;" data-i18n="article.written_by">Escrito por David Alonso</h4>
+            <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--color-text-muted);" data-i18n="article.bio">
+              Desarrollador Full
+              Stack apasionado por el Clean Code, la arquitectura de software y el café de especialidad.
+              Compartiendo lo que aprendo día a día.</p>
+          </div>
+        </div>
+      </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p data-i18n="footer.rights">&copy; 2025 AldaSpace. Construido con pasión y ☕.</p>
+      <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+        <a href="https://github.com/DavidAlonso97" style="opacity: 0.7;" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/david-ezequiel-alonso-alvarez/" style="opacity: 0.7;"
+          target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

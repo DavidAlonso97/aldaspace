@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AldaSpace - Code & Best Practices</title>
+    <meta name="description" content="Blog dedicado a la programación, buenas prácticas y desarrollo de software.">
+    <!-- Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <!-- Code Icon (Heroicon) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                AldaSpace<span>.</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="#" data-i18n="nav.about">Sobre mí</a></li>
+                    <li><a href="#" data-i18n="nav.portfolio">Portfolio</a></li>
+                    <li><a href="#" data-i18n="nav.contact">Contacto</a></li>
+                    <li><button id="lang-toggle" class="btn btn-outline"
+                            style="padding: 0.25rem 0.75rem; font-size: 0.85rem;" data-i18n="btn.lang">EN</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 data-i18n="hero.title">Domina el arte del código limpio</h1>
+                <p data-i18n="hero.subtitle">Explora tutoriales, guías y artículos sobre programación moderna,
+                    arquitecturas y buenas prácticas
+                    para llevar tu desarrollo al siguiente nivel.</p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="#articulos" class="btn btn-primary">
+                        <span data-i18n="hero.btn.read">Leer Artículos</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-outline" data-i18n="hero.btn.repo">Repositorio GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Articles Grid -->
+        <section id="articulos" class="container">
+            <div class="grid-posts">
+
+                <!-- Post 1 -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1000&auto=format&fit=crop"
+                        alt="Coding Setup" class="post-image">
+                    <div class="post-content">
+                        <div class="post-meta" data-i18n="meta.good_practices">Buenas Prácticas</div>
+                        <h2 class="post-title"><a href="post.html" data-i18n="post1.title">Cómo escribir código
+                                autodocumentado</a></h2>
+                        <p class="post-excerpt" data-i18n="post1.excerpt">Descubre por qué los comentarios a veces
+                            sobran y cómo el nombrado de
+                            variables puede contar la historia completa de tu algoritmo.</p>
+                        <div class="post-footer">
+                            <span>10 Dic, 2025</span>
+                            <span>5 min lectura</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                        alt="Code Screen" class="post-image">
+                    <div class="post-content">
+                        <div class="post-meta" data-i18n="meta.frontend">Frontend</div>
+                        <h2 class="post-title"><a href="#" data-i18n="post2.title">CSS Moderno: Más allá de Flexbox</a>
+                        </h2>
+                        <p class="post-excerpt" data-i18n="post2.excerpt">Explorando CSS Grid, Variables y las nuevas
+                            pseudo-clases que están
+                            revolucionando la maquetación web en 2025.</p>
+                        <div class="post-footer">
+                            <span>08 Dic, 2025</span>
+                            <span>7 min lectura</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post Card 1: SOLID -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                        alt="Code Screen" class="post-image">
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-tag">Software Architecture</span>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="solid-principles.html" data-i18n="solid_title">SOLID principles and why they are so
+                                relevant</a>
+                        </h3>
+                        <p class="post-excerpt" data-i18n="solid_excerpt">
+                            Explore the five fundamental SOLID principles that guide us in designing and writing
+                            high-quality, maintainable, and scalable software.
+                        </p>
+                        <div class="post-footer">
+                            <span>Jun 29, 2023</span>
+                            <span data-i18n="read_time_6">6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post Card 2: AAA Testing -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                        alt="Code Screen" class="post-image">
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-tag">Testing</span>
+                        </div>
+                        <h3 class="post-title">
+                            <a href="improve-testing-aaa.html" data-i18n="aaa_title">Improve testing with AAA</a>
+                        </h3>
+                        <p class="post-excerpt" data-i18n="aaa_excerpt">
+                            Learn how to write better tests using the Arrange-Act-Assert (AAA) pattern for clearer and
+                            more maintainable code.
+                        </p>
+                        <div class="post-footer">
+                            <span>Sep 14, 2023</span>
+                            <span data-i18n="read_time_4">4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p data-i18n="footer.rights">&copy; 2025 AldaSpace. Construido con pasión y ☕.</p>
+            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+                <a href="https://github.com/DavidAlonso97" style="opacity: 0.7;" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/david-ezequiel-alonso-alvarez/" style="opacity: 0.7;"
+                    target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLID principles and why they are so relevant | Aldaspace</title>
+  <meta name="description"
+    content="Explore the five fundamental SOLID principles that guide us in designing and writing high-quality, maintainable, and scalable software.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        AldaSpace<span>.</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active" data-i18n="nav.blog">Blog</a></li>
+          <li><a href="#" data-i18n="nav.about">Sobre mí</a></li>
+          <li><a href="#" data-i18n="nav.portfolio">Portfolio</a></li>
+          <li><a href="#" data-i18n="nav.contact">Contacto</a></li>
+          <li><button id="lang-toggle" class="btn btn-outline" style="padding: 0.25rem 0.75rem; font-size: 0.85rem;"
+              data-i18n="btn.lang">EN</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Article Header -->
+    <article class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
+
+      <!-- Article Header -->
+      <header class="article-header">
+        <div
+          style="margin-bottom: 1rem; color: var(--color-brand-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"
+          data-i18n="meta.architecture">
+          Software Architecture</div>
+        <h1 data-i18n="solid_title">SOLID principles and why they are so relevant</h1>
+        <div style="color: var(--color-text-subtle); font-size: 0.95rem;">
+          <span data-i18n="article.author_by">By</span> <strong>David Alonso</strong> • <span>Jun 29,
+            2023</span> • <span>25 <span data-i18n="post.read_time">min read</span></span>
+        </div>
+      </header>
+
+      <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1200&auto=format&fit=crop"
+        alt="Article Cover" class="responsive-img">
+
+      <div class="article-body" data-lang="en">
+        <!-- English Content -->
+        <h2 id="motivation">Motivation</h2>
+        <p>Throughout our lives as developers, we surely go through several projects, which many times are not
+          in the best way and it is very difficult to address and improve them. Many of these problems are
+          often related to the approach taken by developers in that project. Ideally, all developers should
+          use good practices when working and make code much more understandable by other developers who,
+          after us, work on our code. Therefore, it is essential to write maintainable, scalable, clean, and
+          modular code. Now let's explore one of the most recognized and widely adopted approaches in the
+          developer community: the use of SOLID principles.</p>
+        <p><strong>What are they</strong></p>
+        <p>The SOLID principles are a set of five fundamental principles that guide us in designing and writing
+          high-quality software. They emerged in the 2000s and were devised by <a
+            href="https://en.wikipedia.org/wiki/Robert_C._Martin">Robert Cecil Martin</a> along with input
+          from <a href="https://en.wikipedia.org/wiki/Barbara_Liskov">Barbara Liskov</a> y <a
+            href="https://en.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a> and have become a
+          mainstay in the software development community.</p>
+        <p>The SOLID principles are an invaluable guide for developers in creating quality and robust software,
+          as well as fostering effective collaboration and professional growth in the field of software
+          development.</p>
+        <p>Each letter associated with SOLID corresponds to a unique principle, these are:</p>
+        <ul>
+          <li>S: Single Responsibility Principle.</li>
+          <li>O: Open/Closed Principle.</li>
+          <li>L: Liskov Substitution Principle.</li>
+          <li>I: Interface Segregation Principle.</li>
+          <li>D: Dependency Inversion Principle.</li>
+        </ul>
+        <p><strong>Single Responsibility Principle</strong></p>
+        <p>This principle states that each class or module should have a unique responsibility. In other words,
+          a class should only have one reason to change. By maintaining a single, well-defined responsibility,
+          we make code easier to understand, maintain, and reuse.</p><!--kg-card-begin: markdown-->
+        <pre><code>class PaymentService {
+  calculateFee() {
+    // Some code to calculate fee
+  }
+
+  getCurrency() {
+    // Some code to get the actual currency
+  }
+
+  notifyPayment() {
+    // Some code to send notifications
+  }
+  
+  handle() {
+    // Code that executes the logic for the payment
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>In this example we have a PaymentService that not only executes the payment logic, but also must
+          calculate a fee for the payment, obtain the payment currency and notify the payment, which leads to
+          problems of having to maintain responsibilities that do not correspond to the service in question.
+          Let's imagine that tomorrow a currency is added or deleted or the way in which notifications are
+          sent is modified, as this should not be because it means having to modify a service whose purpose is
+          to make a payment.</p>
+        <p>A better implementation following the principle sole responsibility would be:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class PaymentService {
+  handle() {
+    // Code that executes the logic for the payment
+  }
+}
+
+class FeeCalculator {
+  excecute() {
+    // Some code to calculate fee
+  }
+}
+
+class CurrencyService {
+  handle() {
+    // Some code to get the actual currency
+  }
+}
+
+class NotificationService {
+  handle() {
+    // Some code to send notifications
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>In this way, we respect the principle of sole responsibility and when we need to make implementation
+          modifications, we no longer have to modify logic that has nothing to do with it.</p>
+        <p><strong>Open/Closed Principle</strong></p>
+        <p>This principle promotes the extensibility and flexibility of the code. It suggests that entities such
+          as classes and modules should be open for extension but closed for modification. Instead of
+          modifying the existing code, we should be able to extend its functionality through the addition of
+          new classes or methods.</p>
+        <p>To illustrate this with a practical example, consider the following class:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class PaymentMethod {
+  private service: string;
+  constructor(service) {
+    this.service = service;
+  }
+
+  pay() {
+    switch (this.service) {
+      case 'paypal':
+        // Excecutes payment with PayPal Service
+        break;
+      case 'payoneer':
+        // Excecutes payment with Payoneer Service
+        break;
+      case 'bank-transfer':
+        // Excecutes payment with Bank Transfer Service
+        break;
+      default:
+        // Excecutes default logic
+    }
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>This class has many problems, and one of them is the inability to extend behavior through the Open
+          Close principle, since to add a payment service the current implementation must be modified. A
+          better implementation of this case could be:</p><!--kg-card-begin: markdown-->
+        <pre><code>interface PaymentInterface {
+  pay();
+}
+
+class PayPalService implements PaymentInterface {
+  pay() {
+    // PayPal-specific logic for processing a payment
+  }
+}
+
+class PayoneerService implements PaymentInterface {
+  pay() {
+    // Payoneer-specific logic for processing a payment
+  }
+}
+
+class BankTransferService implements PaymentInterface {
+  pay() {
+    // Bank Transfer-specific logic for processing a payment
+  }
+}
+
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Therefore, now to add a payment method you only have to create a class that implements
+          PaymentInterface and include it in the service that handles the payment processing.</p>
+        <p><strong>Liskov Substitution Principle:</strong></p>
+        <p>This principle states that derived classes must be replaceable by their base classes without
+          affecting the correct operation of the program. Its formal definition is as follows:</p>
+        <blockquote>Let ϕ(x) be a property provable aout objects x of type T. Then ϕ(y) should be true for
+          objects y of type S, where S is a subtype of T. </blockquote>
+        <p>In other words, an instance of a base class should be able to be replaced by an instance of a derived
+          class without introducing bugs or unexpected behavior. This encourages code reuse and the creation
+          of consistent class hierarchies.</p>
+        <p>Let's look at an example that doesn't follow this rule:</p><!--kg-card-begin: markdown-->
+        <pre><code>class Bird {  
+    fly() {}
+}
+
+class Eagle extends Bird {
+    dive(){}
+}
+
+const eagle = new Eagle();
+eagle.fly();
+eagle.dive();
+
+class Penguin extends Bird {
+   // We found a problem, penguins can't fly
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Now let's see how ordering the priorities and the hierarchy of the classes can solve this problem:
+        </p><!--kg-card-begin: markdown-->
+        <pre><code>class Bird {
+  layEgg () {}
+}
+
+class FlyingBird extends Bird {
+  fly () {}
+}
+
+class SwimmingBird extends Bird {
+  swim () {}
+}
+
+class Eagle extends FlyingBird {}
+
+class Penguin extends SwimmingBird {}
+
+const penguin = new Penguin();
+penguin.swim();
+penguin.layEgg();
+
+const eagle = new Eagle();
+eagle.fly();
+eagle.layEgg();
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Now we have defined our classes with a better hierarchy and structure, and our children can replace
+          our parents without problems, respecting the Liskov substitution principle.</p>
+        <p><strong>Interface Segregation Principle</strong></p>
+        <p>This principle states that no class should extend behavior of an interface it does not use. Rather
+          than having overloaded, monolithic interfaces, it is preferable to have smaller, more specific
+          interfaces that meet the individual needs of each class. This avoids the creation of unnecessary
+          dependencies and makes the code easier to adapt and maintain.</p>
+        <p>To understand it better let's see the following example:</p><!--kg-card-begin: markdown-->
+        <pre><code>interface Entity {
+  walk();
+  run();
+  jump();
+  attack();
+  pick();
+}
+
+class Player implements Entity {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    // Implementation of pick
+  }
+}
+
+class Enemy implements Entity {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    throw new Error(&quot;Enemies can't pick things.&quot;);
+  }
+}
+
+class Hostage {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    throw new Error(&quot;Hostage can't attack.&quot;);
+  }
+  pick() {
+    throw new Error(&quot;Hostage can't pick things.&quot;);
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>If we wanted to improve this, so classes don't have to forcefully implement behavior they don't need,
+          we could break it up into single interfaces, so it would look something like this:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>interface BaseEntityInterface {
+  walk();
+  run();
+  jump();
+}
+
+interface AttackeableInterface {
+  attack();
+}
+
+interface PickeableInterface {
+  pick();
+}
+
+class Player implements BaseEntityInterface, AttackeableInterface, PickeableInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    // Implementation of pick
+  }
+}
+
+class Enemy implements BaseEntityInterface, AttackeableInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+}
+
+class Hostage implements BaseEntityInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p><strong>Dependency Inversion Principle</strong></p>
+        <p>This principle is based on the idea that high-level modules should not depend on low-level modules.
+          Both must depend on abstractions. This principle promotes decoupling and modularity of code, which
+          makes it easy to evolve and test individual components. This principle is also very useful when
+          testing, since by using dependency inversion, it is possible to replace real implementations with
+          mock or test objects with mocks or stubs.</p>
+        <p>To illustrate this further, let's consider an example implementation:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class UsersReport {
+  database: MySQLDatabase;
+  constructor(database) {
+      this.database = database
+  }
+  open() {
+      this.database.get();
+  }
+  save() {
+      this.database.insert();
+  }
+}
+
+class MySQLDatabase {
+  get() {
+    // Get implementation
+  }
+  insert() {
+      // Insert implementation
+  }
+  update() {
+      // Update implementation
+  }
+  delete() {
+      // Delete implementation
+  }
+}
+
+// When we use this classes
+const report = new UsersReport(
+new MySQLDatabase()
+)
+report.open()
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>This code works, yes, but it has a lot of problems, since the implementation of the user report
+          generator is completely rooted in MySQL, and if tomorrow we want to use another service, such as
+          Postgress, we are in trouble, The exchange of both will not be so simple.</p>
+        <p>Also, if we think about the tests, it may be that when testing, you want to use an in-memory database
+          to speed up the process as well as not wanting to use the same production database, for obvious
+          reasons.</p>
+        <p>What is recommended then is to apply the dependency inversion principle:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>interface DatabaseInterface {
+  get();
+  insert();
+  update();
+  delete();
+}
+
+class MySQLDatabase implements DatabaseInterface {
+  get() {
+    // Get implementation for MySQL
+  }
+  insert() {
+      // Insert implementation for MySQL
+  }
+  update() {
+      // Update implementation for MySQL
+  }
+  delete() {
+      // Delete implementation for MySQL
+  }
+}
+
+class Postgress implements DatabaseInterface {
+  get() {
+    // Get implementation for Postgress
+  }
+  insert() {
+      // Insert implementation for Postgress
+  }
+  update() {
+      // Update implementation for Postgress
+  }
+  delete() {
+      // Delete implementation for Postgress
+  }
+}
+
+class UsersReport {
+  database: DatabaseInterface;
+  constructor(database) {
+      this.database = database;
+  }
+  open() {
+      this.database.get();
+  }
+  save() {
+      this.database.insert();
+  }
+}
+// When we use this classes
+const mysql = new MySQLDatabase();
+const usersReportMySQL = new UsersReport(mysql);
+usersReportMySQL.open();
+
+const postgress = new Postgress();
+const usersReportPostgress = new UsersReport(postgress);
+usersReportPostgress.open();
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <h2 id="conclusion">Conclusion</h2>
+        <p>To finish and round off the idea, the SOLID principles are just that, principles, that is,
+          recommendations or good practices that can help to write cleaner, more maintainable, scalable and,
+          above all, higher-quality code, which will allow us to lay foundations in our projects and leave the
+          footer so that other developers can continue from there with robust and readable code.</p>
+        <p>Robert C. Martin himself once stated:</p>
+        <blockquote>"This is not about rules, or laws, or absolute truths, but rather common sense solutions to
+          common problems."</blockquote>
+        <p>This allows us to know that although they are not strictly necessary laws or concepts, they do allow
+          a higher quality development and will be better received by third parties.<br></p>
+      </div>
+
+      <div class="article-body" data-lang="es" style="display: none;">
+        <!-- Spanish Content -->
+        <blockquote class="info-quote">
+          <p>Este artículo solo está disponible en Inglés actualmente.</p>
+        </blockquote>
+        <h2 id="motivation">Motivation</h2>
+        <p>Throughout our lives as developers, we surely go through several projects, which many times are not
+          in the best way and it is very difficult to address and improve them. Many of these problems are
+          often related to the approach taken by developers in that project. Ideally, all developers should
+          use good practices when working and make code much more understandable by other developers who,
+          after us, work on our code. Therefore, it is essential to write maintainable, scalable, clean, and
+          modular code. Now let's explore one of the most recognized and widely adopted approaches in the
+          developer community: the use of SOLID principles.</p>
+        <p><strong>What are they</strong></p>
+        <p>The SOLID principles are a set of five fundamental principles that guide us in designing and writing
+          high-quality software. They emerged in the 2000s and were devised by <a
+            href="https://en.wikipedia.org/wiki/Robert_C._Martin">Robert Cecil Martin</a> along with input
+          from <a href="https://en.wikipedia.org/wiki/Barbara_Liskov">Barbara Liskov</a> y <a
+            href="https://en.wikipedia.org/wiki/Bertrand_Meyer">Bertrand Meyer</a> and have become a
+          mainstay in the software development community.</p>
+        <p>The SOLID principles are an invaluable guide for developers in creating quality and robust software,
+          as well as fostering effective collaboration and professional growth in the field of software
+          development.</p>
+        <p>Each letter associated with SOLID corresponds to a unique principle, these are:</p>
+        <ul>
+          <li>S: Single Responsibility Principle.</li>
+          <li>O: Open/Closed Principle.</li>
+          <li>L: Liskov Substitution Principle.</li>
+          <li>I: Interface Segregation Principle.</li>
+          <li>D: Dependency Inversion Principle.</li>
+        </ul>
+        <p><strong>Single Responsibility Principle</strong></p>
+        <p>This principle states that each class or module should have a unique responsibility. In other words,
+          a class should only have one reason to change. By maintaining a single, well-defined responsibility,
+          we make code easier to understand, maintain, and reuse.</p><!--kg-card-begin: markdown-->
+        <pre><code>class PaymentService {
+  calculateFee() {
+    // Some code to calculate fee
+  }
+
+  getCurrency() {
+    // Some code to get the actual currency
+  }
+
+  notifyPayment() {
+    // Some code to send notifications
+  }
+  
+  handle() {
+    // Code that executes the logic for the payment
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>In this example we have a PaymentService that not only executes the payment logic, but also must
+          calculate a fee for the payment, obtain the payment currency and notify the payment, which leads to
+          problems of having to maintain responsibilities that do not correspond to the service in question.
+          Let's imagine that tomorrow a currency is added or deleted or the way in which notifications are
+          sent is modified, as this should not be because it means having to modify a service whose purpose is
+          to make a payment.</p>
+        <p>A better implementation following the principle sole responsibility would be:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class PaymentService {
+  handle() {
+    // Code that executes the logic for the payment
+  }
+}
+
+class FeeCalculator {
+  excecute() {
+    // Some code to calculate fee
+  }
+}
+
+class CurrencyService {
+  handle() {
+    // Some code to get the actual currency
+  }
+}
+
+class NotificationService {
+  handle() {
+    // Some code to send notifications
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>In this way, we respect the principle of sole responsibility and when we need to make implementation
+          modifications, we no longer have to modify logic that has nothing to do with it.</p>
+        <p><strong>Open/Closed Principle</strong></p>
+        <p>This principle promotes the extensibility and flexibility of the code. It suggests that entities such
+          as classes and modules should be open for extension but closed for modification. Instead of
+          modifying the existing code, we should be able to extend its functionality through the addition of
+          new classes or methods.</p>
+        <p>To illustrate this with a practical example, consider the following class:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class PaymentMethod {
+  private service: string;
+  constructor(service) {
+    this.service = service;
+  }
+
+  pay() {
+    switch (this.service) {
+      case 'paypal':
+        // Excecutes payment with PayPal Service
+        break;
+      case 'payoneer':
+        // Excecutes payment with Payoneer Service
+        break;
+      case 'bank-transfer':
+        // Excecutes payment with Bank Transfer Service
+        break;
+      default:
+        // Excecutes default logic
+    }
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>This class has many problems, and one of them is the inability to extend behavior through the Open
+          Close principle, since to add a payment service the current implementation must be modified. A
+          better implementation of this case could be:</p><!--kg-card-begin: markdown-->
+        <pre><code>interface PaymentInterface {
+  pay();
+}
+
+class PayPalService implements PaymentInterface {
+  pay() {
+    // PayPal-specific logic for processing a payment
+  }
+}
+
+class PayoneerService implements PaymentInterface {
+  pay() {
+    // Payoneer-specific logic for processing a payment
+  }
+}
+
+class BankTransferService implements PaymentInterface {
+  pay() {
+    // Bank Transfer-specific logic for processing a payment
+  }
+}
+
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Therefore, now to add a payment method you only have to create a class that implements
+          PaymentInterface and include it in the service that handles the payment processing.</p>
+        <p><strong>Liskov Substitution Principle:</strong></p>
+        <p>This principle states that derived classes must be replaceable by their base classes without
+          affecting the correct operation of the program. Its formal definition is as follows:</p>
+        <blockquote>Let ϕ(x) be a property provable aout objects x of type T. Then ϕ(y) should be true for
+          objects y of type S, where S is a subtype of T. </blockquote>
+        <p>In other words, an instance of a base class should be able to be replaced by an instance of a derived
+          class without introducing bugs or unexpected behavior. This encourages code reuse and the creation
+          of consistent class hierarchies.</p>
+        <p>Let's look at an example that doesn't follow this rule:</p><!--kg-card-begin: markdown-->
+        <pre><code>class Bird {  
+    fly() {}
+}
+
+class Eagle extends Bird {
+    dive(){}
+}
+
+const eagle = new Eagle();
+eagle.fly();
+eagle.dive();
+
+class Penguin extends Bird {
+   // We found a problem, penguins can't fly
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Now let's see how ordering the priorities and the hierarchy of the classes can solve this problem:
+        </p><!--kg-card-begin: markdown-->
+        <pre><code>class Bird {
+  layEgg () {}
+}
+
+class FlyingBird extends Bird {
+  fly () {}
+}
+
+class SwimmingBird extends Bird {
+  swim () {}
+}
+
+class Eagle extends FlyingBird {}
+
+class Penguin extends SwimmingBird {}
+
+const penguin = new Penguin();
+penguin.swim();
+penguin.layEgg();
+
+const eagle = new Eagle();
+eagle.fly();
+eagle.layEgg();
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>Now we have defined our classes with a better hierarchy and structure, and our children can replace
+          our parents without problems, respecting the Liskov substitution principle.</p>
+        <p><strong>Interface Segregation Principle</strong></p>
+        <p>This principle states that no class should extend behavior of an interface it does not use. Rather
+          than having overloaded, monolithic interfaces, it is preferable to have smaller, more specific
+          interfaces that meet the individual needs of each class. This avoids the creation of unnecessary
+          dependencies and makes the code easier to adapt and maintain.</p>
+        <p>To understand it better let's see the following example:</p><!--kg-card-begin: markdown-->
+        <pre><code>interface Entity {
+  walk();
+  run();
+  jump();
+  attack();
+  pick();
+}
+
+class Player implements Entity {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    // Implementation of pick
+  }
+}
+
+class Enemy implements Entity {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    throw new Error(&quot;Enemies can't pick things.&quot;);
+  }
+}
+
+class Hostage {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    throw new Error(&quot;Hostage can't attack.&quot;);
+  }
+  pick() {
+    throw new Error(&quot;Hostage can't pick things.&quot;);
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>If we wanted to improve this, so classes don't have to forcefully implement behavior they don't need,
+          we could break it up into single interfaces, so it would look something like this:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>interface BaseEntityInterface {
+  walk();
+  run();
+  jump();
+}
+
+interface AttackeableInterface {
+  attack();
+}
+
+interface PickeableInterface {
+  pick();
+}
+
+class Player implements BaseEntityInterface, AttackeableInterface, PickeableInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+  pick() {
+    // Implementation of pick
+  }
+}
+
+class Enemy implements BaseEntityInterface, AttackeableInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+  attack() {
+    // Implementation of attack
+  }
+}
+
+class Hostage implements BaseEntityInterface {
+  walk() {
+    // Implementation of walk
+  }
+  run() {
+    // Implementation of run
+  }
+  jump() {
+    // Implementation of jump
+  }
+}
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p><strong>Dependency Inversion Principle</strong></p>
+        <p>This principle is based on the idea that high-level modules should not depend on low-level modules.
+          Both must depend on abstractions. This principle promotes decoupling and modularity of code, which
+          makes it easy to evolve and test individual components. This principle is also very useful when
+          testing, since by using dependency inversion, it is possible to replace real implementations with
+          mock or test objects with mocks or stubs.</p>
+        <p>To illustrate this further, let's consider an example implementation:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>class UsersReport {
+  database: MySQLDatabase;
+  constructor(database) {
+      this.database = database
+  }
+  open() {
+      this.database.get();
+  }
+  save() {
+      this.database.insert();
+  }
+}
+
+class MySQLDatabase {
+  get() {
+    // Get implementation
+  }
+  insert() {
+      // Insert implementation
+  }
+  update() {
+      // Update implementation
+  }
+  delete() {
+      // Delete implementation
+  }
+}
+
+// When we use this classes
+const report = new UsersReport(
+new MySQLDatabase()
+)
+report.open()
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <p>This code works, yes, but it has a lot of problems, since the implementation of the user report
+          generator is completely rooted in MySQL, and if tomorrow we want to use another service, such as
+          Postgress, we are in trouble, The exchange of both will not be so simple.</p>
+        <p>Also, if we think about the tests, it may be that when testing, you want to use an in-memory database
+          to speed up the process as well as not wanting to use the same production database, for obvious
+          reasons.</p>
+        <p>What is recommended then is to apply the dependency inversion principle:</p>
+        <!--kg-card-begin: markdown-->
+        <pre><code>interface DatabaseInterface {
+  get();
+  insert();
+  update();
+  delete();
+}
+
+class MySQLDatabase implements DatabaseInterface {
+  get() {
+    // Get implementation for MySQL
+  }
+  insert() {
+      // Insert implementation for MySQL
+  }
+  update() {
+      // Update implementation for MySQL
+  }
+  delete() {
+      // Delete implementation for MySQL
+  }
+}
+
+class Postgress implements DatabaseInterface {
+  get() {
+    // Get implementation for Postgress
+  }
+  insert() {
+      // Insert implementation for Postgress
+  }
+  update() {
+      // Update implementation for Postgress
+  }
+  delete() {
+      // Delete implementation for Postgress
+  }
+}
+
+class UsersReport {
+  database: DatabaseInterface;
+  constructor(database) {
+      this.database = database;
+  }
+  open() {
+      this.database.get();
+  }
+  save() {
+      this.database.insert();
+  }
+}
+// When we use this classes
+const mysql = new MySQLDatabase();
+const usersReportMySQL = new UsersReport(mysql);
+usersReportMySQL.open();
+
+const postgress = new Postgress();
+const usersReportPostgress = new UsersReport(postgress);
+usersReportPostgress.open();
+</code></pre>
+        <!--kg-card-end: markdown-->
+        <h2 id="conclusion">Conclusion</h2>
+        <p>To finish and round off the idea, the SOLID principles are just that, principles, that is,
+          recommendations or good practices that can help to write cleaner, more maintainable, scalable and,
+          above all, higher-quality code, which will allow us to lay foundations in our projects and leave the
+          footer so that other developers can continue from there with robust and readable code.</p>
+        <p>Robert C. Martin himself once stated:</p>
+        <blockquote>"This is not about rules, or laws, or absolute truths, but rather common sense solutions to
+          common problems."</blockquote>
+        <p>This allows us to know that although they are not strictly necessary laws or concepts, they do allow
+          a higher quality development and will be better received by third parties.<br></p>
+      </div>
+
+      <!-- Author Bio -->
+      <div class="author-bio">
+        <img src="https://ui-avatars.com/api/?name=David+Alonso&background=6366f1&color=fff" alt="David Alonso"
+          class="author-avatar">
+        <div>
+          <h4 style="margin-bottom: 0.5rem;" data-i18n="article.written_by">Escrito por David Alonso</h4>
+          <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--color-text-muted);" data-i18n="article.bio">
+            Desarrollador Full
+            Stack apasionado por el Clean Code, la arquitectura de software y el café de especialidad.
+            Compartiendo lo que aprendo día a día.</p>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p data-i18n="footer.rights">&copy; 2025 AldaSpace. Construido con pasión y ☕.</p>
+      <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+        <a href="https://github.com/DavidAlonso97" style="opacity: 0.7;" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/david-ezequiel-alonso-alvarez/" style="opacity: 0.7;"
+          target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
