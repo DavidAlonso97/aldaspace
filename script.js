@@ -45,7 +45,12 @@ const translations = {
         // Article Page specific
         "article.author_by": "Por",
         "article.written_by": "Escrito por David Alonso",
-        "article.bio": "Desarrollador Full Stack apasionado por el Clean Code, la arquitectura de software y el café de especialidad. Compartiendo lo que aprendo día a día."
+        "article.bio": "Desarrollador Full Stack apasionado por el Clean Code, la arquitectura de software y el café de especialidad. Compartiendo lo que aprendo día a día.",
+
+        // Support Section
+        "support.title": "Apoya mi trabajo",
+        "support.desc": "Si te gusta mi contenido y quieres ayudarme a seguir creando, puedes invitarme un café. ¡Cualquier aporte es bienvenido!",
+        "support.btn": "Invitar un cafecito"
     },
     en: {
         "nav.blog": "Blog",
@@ -93,7 +98,12 @@ const translations = {
         // Article Page specific
         "article.author_by": "By",
         "article.written_by": "Written by David Alonso",
-        "article.bio": "Full Stack Developer passionate about Clean Code, software architecture, and specialty coffee. Sharing what I learn day by day."
+        "article.bio": "Full Stack Developer passionate about Clean Code, software architecture, and specialty coffee. Sharing what I learn day by day.",
+
+        // Support Section
+        "support.title": "Support my work",
+        "support.desc": "If you like my content and want to help me keep creating, you can buy me a coffee. Any contribution is welcome!",
+        "support.btn": "Buy me a coffee"
     }
 };
 

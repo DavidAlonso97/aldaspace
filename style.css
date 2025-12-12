@@ -546,6 +546,43 @@ code {
     border: 2px solid var(--color-brand-primary);
 }
 
+/* Support Section */
+.support-section {
+    padding: 6rem 0;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(var(--hue-brand), 0.1) 0%, transparent 100%);
+    border-top: 1px solid var(--color-border);
+}
+
+.support-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.support-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+
+.support-content p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+}
+
+.support-btn {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    /* Pill shape */
+}
+
 .responsive-img {
     width: 100%;
     margin: 2rem 0;
