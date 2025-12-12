@@ -35,9 +35,8 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="index.html" class="active" data-i18n="nav.blog">Blog</a></li>
-                    <li><a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
-                    <li><a href="#" data-i18n="nav.portfolio">Portfolio</a></li>
-                    <li><a href="#" data-i18n="nav.contact">Contacto</a></li>
+                    <li><a href="#about" data-i18n="nav.about">Sobre mí</a></li>
+                    <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
                     <li><button id="lang-toggle" class="btn btn-outline"
                             style="padding: 0.25rem 0.75rem; font-size: 0.85rem;" data-i18n="btn.lang">EN</button></li>
                 </ul>
@@ -58,12 +57,12 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1 data-i18n="hero.title">Domina el arte del código limpio</h1>
+                <h1 data-i18n="hero.title">Del código que funciona al código que trasciende</h1>
                 <p data-i18n="hero.subtitle">Explora tutoriales, guías y artículos sobre programación moderna,
                     arquitecturas y buenas prácticas
                     para llevar tu desarrollo al siguiente nivel.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center;">
-                    <a href="#articulos" class="btn btn-primary">
+                    <a href="#articles" class="btn btn-primary">
                         <span data-i18n="hero.btn.read">Leer Artículos</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -71,21 +70,21 @@
                             <polyline points="19 12 12 19 5 12"></polyline>
                         </svg>
                     </a>
-                    <a href="#" class="btn btn-outline" data-i18n="hero.btn.repo">Repositorio GitHub</a>
+                    <a href="https://github.com/DavidAlonso97/aldaspace" class="btn btn-outline" data-i18n="hero.btn.repo" target="_blank">Repositorio GitHub</a>
                 </div>
             </div>
         </section>
 
         <!-- Articles Grid -->
-        <section id="articulos" class="container">
+        <section id="articles" class="container">
             <div class="grid-posts">
 
                 <article class="post-card">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                    <img src="./images/solid.png"
                         alt="Code Screen" class="post-image">
                     <div class="post-content">
                         <div class="post-meta">
-                            <span class="post-tag">Software Architecture</span>
+                            <span class="post-tag" data-i18n="meta.good_practices">Buenas prácticas</span>
                         </div>
                         <h3 class="post-title">
                             <a href="solid-principles.html" data-i18n="solid_title">SOLID principles and why they are so
@@ -97,17 +96,17 @@
                         </p>
                         <div class="post-footer">
                             <span>Jun 29, 2023</span>
-                            <span data-i18n="read_time_6">6 min read</span>
+                            <span data-i18n="read_time_12">12 min read</span>
                         </div>
                     </div>
                 </article>
 
                 <article class="post-card">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                    <img src="./images/aaa.png"
                         alt="Code Screen" class="post-image">
                     <div class="post-content">
                         <div class="post-meta">
-                            <span class="post-tag">Testing</span>
+                            <span class="post-tag" data-i18n="meta.testing">Testing</span>
                         </div>
                         <h3 class="post-title">
                             <a href="improve-testing-aaa.html" data-i18n="aaa_title">Improve testing with AAA</a>
@@ -118,7 +117,7 @@
                         </p>
                         <div class="post-footer">
                             <span>Sep 14, 2023</span>
-                            <span data-i18n="read_time_4">4 min read</span>
+                            <span data-i18n="read_time_8">8 min read</span>
                         </div>
                     </div>
                 </article>
@@ -128,7 +127,7 @@
 
 
         <!-- About Me Section -->
-        <section id="sobre-mi" class="about-section">
+        <section id="about" class="about-section">
             <div class="container">
                 <div class="about-content">
                     <div class="about-image-wrapper">
@@ -144,6 +143,12 @@
                             Me encanta compartir conocimientos sobre buenas prácticas, arquitectura de software y las
                             últimas tecnologías web.
                         </p>
+                        <p data-i18n="about.myexperience">
+                            A demás de mi dedicacion completa a ser Ingeniero en sistemas de información, soy docente
+                            de la universidad tecnologica nacional UTN, facultad regional San Francisco, de la provincia
+                            de Córdoba. La transmision de conocimientos es una de las actividades que mas disfruto y un
+                            sueño para mí.
+                        </p>
                         <p data-i18n="about.subdesc">
                             En este espacio encontrarás reflexiones y guías para mejorar tu código día a día.
                         </p>
@@ -153,6 +158,67 @@
                                 class="social-link">LinkedIn</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="contact-header">
+                    <h2 data-i18n="contact.title">Contacto</h2>
+                    <p data-i18n="contact.desc">¿Tienes alguna pregunta o sugerencia? ¡Todo feedback es bienvenido!</p>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- GitHub -->
+                    <a href="https://github.com/DavidAlonso97" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>@DavidAlonso97</p>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/david-ezequiel-alonso-alvarez/" target="_blank"
+                        class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p>David Alonso</p>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:davidealonso.da@gmail.com" class="contact-card">
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Email</h3>
+                        <p>davidealonso.da@gmail.com</p>
+                    </a>
                 </div>
             </div>
         </section>

@@ -7,7 +7,8 @@ const translations = {
         "about.title": "Sobre mí",
         "about.desc": "Hola, soy David. Un apasionado desarrollador de software enfocado en crear soluciones elegantes y eficientes. Me encanta compartir conocimientos sobre buenas prácticas, arquitectura de software y las últimas tecnologías web.",
         "about.subdesc": "En este espacio encontrarás reflexiones y guías para mejorar tu código día a día.",
-        "hero.title": "Domina el arte del código limpio",
+        "about.myexperience": "Además de mi dedicación completa a ser Ingeniero en Sistemas de Información, soy docente de la universidad tecnológica nacional UTN, facultad regional San Francisco, de la provincia de Córdoba. La transmisión de conocimientos es una de las actividades que más disfruto y un sueño para mí.",
+        "hero.title": "Del código que funciona al código que trasciende",
         "hero.subtitle": "Explora tutoriales, guías y artículos sobre programación moderna, arquitecturas y buenas prácticas para llevar tu desarrollo al siguiente nivel.",
         "hero.btn.read": "Leer Artículos",
         "hero.btn.repo": "Repositorio GitHub",
@@ -23,24 +24,18 @@ const translations = {
         "solid_excerpt": "Explora los cinco principios fundamentales SOLID que nos guían en el diseño y escritura de software de alta calidad, mantenible y escalable.",
         "aaa_title": "Mejora los tests con AAA",
         "aaa_excerpt": "Aprende a escribir mejores tests usando el patrón Arrange-Act-Assert (AAA) para un código más claro y mantenible.",
-        "read_time_6": "6 min lectura",
-        "read_time_4": "4 min lectura",
-
-        // Post 1 (Index)
-        "post1.title": "Cómo escribir código autodocumentado",
-        "post1.excerpt": "Descubre por qué los comentarios a veces sobran y cómo el nombrado de variables puede contar la historia completa de tu algoritmo.",
-
-        // Post 2 (Index)
-        "post2.title": "CSS Moderno: Más allá de Flexbox",
-        "post2.excerpt": "Explorando CSS Grid, Variables y las nuevas pseudo-clases que están revolucionando la maquetación web en 2025.",
+        "read_time_12": "12 min lectura",
+        "read_time_8": "8 min lectura",
 
         // Post 3 (Index)
         "post3.title": "Clean Architecture en el mundo real",
         "post3.excerpt": "Una guía práctica para implementar principios SOLID y separar responsabilidades en aplicaciones medianas y grandes.",
+        "post3.tag": "Arquitectura",
 
         // Post 4 (Index)
         "post4.title": "TDD: ¿Mito o realidad necesaria?",
         "post4.excerpt": "Analizamos los pros y contras del Test Driven Development y cuándo realmente vale la pena aplicarlo estrictamente.",
+        "post4.tag": "Testing",
 
         // Article Page specific
         "article.author_by": "Por",
@@ -50,7 +45,11 @@ const translations = {
         // Support Section
         "support.title": "Apoya mi trabajo",
         "support.desc": "Si te gusta mi contenido y quieres ayudarme a seguir creando, puedes invitarme un café. ¡Cualquier aporte es bienvenido!",
-        "support.btn": "Invitar un cafecito"
+        "support.btn": "Invitar un cafecito",
+
+        // Contact Section
+        "contact.title": "Contacto",
+        "contact.desc": "¿Tienes alguna pregunta o sugerencia? ¡Todo feedback es bienvenido!"
     },
     en: {
         "nav.blog": "Blog",
@@ -60,7 +59,8 @@ const translations = {
         "about.title": "About Me",
         "about.desc": "Hi, I'm David. A passionate software developer focused on creating elegant and efficient solutions. I love sharing knowledge about best practices, software architecture, and the latest web technologies.",
         "about.subdesc": "In this space, you will find reflections and guides to improve your code every day.",
-        "hero.title": "Master the Art of Clean Code",
+        "about.myexperience": "Besides my full-time dedication to being an Information Systems Engineer, I am a professor at the National Technological University (UTN), San Francisco Regional Faculty, in the province of Córdoba. Sharing knowledge is one of the activities I enjoy most and a dream come true for me.",
+        "hero.title": "From code that works to code that transcends",
         "hero.subtitle": "Explore tutorials, guides, and articles on modern programming, software architecture, and best practices to take your development to the next level.",
         "hero.btn.read": "Read Articles",
         "hero.btn.repo": "GitHub Repository",
@@ -90,10 +90,12 @@ const translations = {
         // Post 3 (Index)
         "post3.title": "Clean Architecture in the Real World",
         "post3.excerpt": "A practical guide to implementing SOLID principles and separating concerns in medium to large applications.",
+        "post3.tag": "Architecture",
 
         // Post 4 (Index)
         "post4.title": "TDD: Myth or Necessity?",
         "post4.excerpt": "Analyzing the pros and cons of Test Driven Development and when it's really worth applying strictly.",
+        "post4.tag": "Testing",
 
         // Article Page specific
         "article.author_by": "By",
@@ -103,7 +105,11 @@ const translations = {
         // Support Section
         "support.title": "Support my work",
         "support.desc": "If you like my content and want to help me keep creating, you can buy me a coffee. Any contribution is welcome!",
-        "support.btn": "Buy me a coffee"
+        "support.btn": "Buy me a coffee",
+
+        // Contact Section
+        "contact.title": "Contact",
+        "contact.desc": "Do you have any questions or suggestions? Any feedback is welcome!"
     }
 };
 
