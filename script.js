@@ -26,6 +26,8 @@ const translations = {
         "aaa_excerpt": "Aprende a escribir mejores tests usando el patrón Arrange-Act-Assert (AAA) para un código más claro y mantenible.",
         "read_time_12": "12 min lectura",
         "read_time_8": "8 min lectura",
+        "leak_title": "Post-mortem técnico: La filtración del código fuente de la App Store",
+        "leak_excerpt": "Un análisis técnico sobre la filtración del código frontend de la App Store mediante sourcemaps expuestos y las lecciones aprendidas.",
 
         // Post 3 (Index)
         "post3.title": "Clean Architecture en el mundo real",
@@ -78,6 +80,8 @@ const translations = {
         "aaa_excerpt": "Learn how to write better tests using the Arrange-Act-Assert (AAA) pattern for clearer and more maintainable code.",
         "read_time_6": "6 min read",
         "read_time_4": "4 min read",
+        "leak_title": "Technical Post-mortem: The App Store Source Code Leak",
+        "leak_excerpt": "A technical analysis of how the App Store frontend code was leaked via exposed sourcemaps and the lessons learned.",
 
         // Post 1 (Index)
         "post1.title": "How to Write Self-Documenting Code",
