@@ -66,32 +66,46 @@
                     </div>
                 </header>
 
-                <img src="./images/aaa.png" alt="App Store Source Code Leak Illustration"
+                <img src="./images/apple-leak-sourcemaps.png" alt="App Store Source Code Leak Illustration"
                     class="responsive-img">
 
                 <!-- English Content -->
                 <div class="article-body" data-lang="en">
                     <blockquote class="info-quote">
-                      <p>This article is a translation of the original Spanish version.</p>
+                        <p>This article is a translation of the original Spanish version.</p>
                     </blockquote>
-                    <p>A piece of news rang loud and sparked the interest and curiosity of an entire community upon learning that the source code of the Apple App Store frontend was leaked.</p>
+                    <p>A piece of news rang loud and sparked the interest and curiosity of an entire community upon
+                        learning that the source code of the Apple App Store frontend was leaked.</p>
                     <p>This leaves us with some questions:</p>
                     <ul>
                         <li>Is frontend code not public by itself? Why can we claim it has been “leaked”?</li>
                         <li>What does it mean that we can access the original TypeScript files?</li>
                         <li>How were we able to recreate these files?</li>
                     </ul>
-                    <p>We will find answers to all these questions and more, and see how we should work so this doesn't happen to us in our production applications.</p>
+                    <p>We will find answers to all these questions and more, and see how we should work so this doesn't
+                        happen to us in our production applications.</p>
 
-                    <p>First, let's answer the question of why we say the code has been leaked if the frontend is code served to clients, and therefore, “public”.</p>
-                    <p>Well, the short answer is that yes, we always have access to the code running on the client, however, this does not mean that this code is the source code.</p>
+                    <p>First, let's answer the question of why we say the code has been leaked if the frontend is code
+                        served to clients, and therefore, “public”.</p>
+                    <p>Well, the short answer is that yes, we always have access to the code running on the client,
+                        however, this does not mean that this code is the source code.</p>
 
                     <h3>What is a sourcemap?</h3>
-                    <p>Basically, a sourcemap is an auxiliary file in JSON format (<code>.js.map</code>), that establishes a bidirectional link between the final code executed in the browser (transposed, bundled, and/or minified code) and the original source code written by the developer. This allows us to recreate the original file from the minified file. Clearly, the manual process can take a long time, but today there are tools that allow us to do this, such as SourceMap-Visualizer (https://bit.ly/sourcemap-visualize), where by uploading the minified javascript file and the sourcemap we can see the original ts file, or we can also create our own script for its recreation.</p>
+                    <p>Basically, a sourcemap is an auxiliary file in JSON format (<code>.js.map</code>), that
+                        establishes a bidirectional link between the final code executed in the browser (transposed,
+                        bundled, and/or minified code) and the original source code written by the developer. This
+                        allows us to recreate the original file from the minified file. Clearly, the manual process can
+                        take a long time, but today there are tools that allow us to do this, such as
+                        SourceMap-Visualizer (https://bit.ly/sourcemap-visualize), where by uploading the minified
+                        javascript file and the sourcemap we can see the original ts file, or we can also create our own
+                        script for its recreation.</p>
 
                     <h3>A practical approach</h3>
-                    <p>To understand it even better, we can move on to a practical application of how sourcemaps really work and how my Typescript code becomes Javascript.</p>
-                    <p>On <a href="https://www.polarsignals.com/blog/posts/2025/11/04/javascript-source-maps-internals" target="_blank">Polarsignals</a> there is a post where we can see in a more pleasant way how these steps work, but even so, we will address it so that we can all understand it.</p>
+                    <p>To understand it even better, we can move on to a practical application of how sourcemaps really
+                        work and how my Typescript code becomes Javascript.</p>
+                    <p>On <a href="https://www.polarsignals.com/blog/posts/2025/11/04/javascript-source-maps-internals"
+                            target="_blank">Polarsignals</a> there is a post where we can see in a more pleasant way how
+                        these steps work, but even so, we will address it so that we can all understand it.</p>
 
                     <p>Let's look for example at the sample code of a simple Typescript application:</p>
 
@@ -107,9 +121,13 @@ function createGreeting(name: string): string {
 }
 export default createGreeting;</code></pre>
 
-                    <p>In this stage of the source code, we do not yet count on sourcemaps, since we have no need to map absolutely anything yet.</p>
+                    <p>In this stage of the source code, we do not yet count on sourcemaps, since we have no need to map
+                        absolutely anything yet.</p>
 
-                    <p>Then, for our Typescript file to be executable by a browser, we need it to be Javascript. Typescript really works as a Javascript mask, improving the web application development experience (topic for another post 😉). So, we move to Javascript code, in the transpilation process, and the result would be the following:</p>
+                    <p>Then, for our Typescript file to be executable by a browser, we need it to be Javascript.
+                        Typescript really works as a Javascript mask, improving the web application development
+                        experience (topic for another post 😉). So, we move to Javascript code, in the transpilation
+                        process, and the result would be the following:</p>
 
                     <pre><code class="language-javascript">// dist/greeting.js
 /**
@@ -125,9 +143,13 @@ function createGreeting(name) {
 module.exports = createGreeting;
 //# sourceMappingURL=greeting.js.map</code></pre>
 
-                    <p>The comment at the end (<code>//# sourceMappingURL=greeting.js.map</code>) is the directive line that tells the debugging tool where to find the Transpiled Source Map (<code>.js.map</code>). This JSON file maps the lines and columns of <code>./dist/greeting.js</code> back to the lines and columns of <code>./src/greeting.ts</code>.</p>
+                    <p>The comment at the end (<code>//# sourceMappingURL=greeting.js.map</code>) is the directive line
+                        that tells the debugging tool where to find the Transpiled Source Map (<code>.js.map</code>).
+                        This JSON file maps the lines and columns of <code>./dist/greeting.js</code> back to the lines
+                        and columns of <code>./src/greeting.ts</code>.</p>
 
-                    <p>And now that we have a javascript file, we should be able to visualize the file autogenerated by our transpilation tool, in JSON format:</p>
+                    <p>And now that we have a javascript file, we should be able to visualize the file autogenerated by
+                        our transpilation tool, in JSON format:</p>
 
                     <pre><code class="language-json">// dist/greeting.js.map
 {
@@ -150,27 +172,46 @@ module.exports = createGreeting;
   "mappings": "AAKA,SAASA,cAAgBC,MAAW;IAChC,IAAIC,QAAO,GAAG,SAAO,GAAG,GAAGD,IAAI,GAAG,gCAAgC;IACrE,OAAOC,QAAQ;AACnB;AAGA;AACAC,OAAOC,OAAO,GAAGJ,cAAc"
 }</code></pre>
 
-                    <p>This is where the mapping magic happens, specifically we have the function names and their respective mappings. Then, the next step is the bundle creation, a process by which the code is packaged into a single <code>bundle.js</code> file and finally, for reasons of optimizing bundle size and efficiency, minification scripts are used, which significantly reduce file size and consequently, improve general performance.</p>
+                    <p>This is where the mapping magic happens, specifically we have the function names and their
+                        respective mappings. Then, the next step is the bundle creation, a process by which the code is
+                        packaged into a single <code>bundle.js</code> file and finally, for reasons of optimizing bundle
+                        size and efficiency, minification scripts are used, which significantly reduce file size and
+                        consequently, improve general performance.</p>
                     <p>This gives us the following javascript as output:</p>
 
                     <pre><code class="language-javascript">// dist/bundle.min.js
 !function(){var e=function(e){var t="¡Hola, "+e+"! Bienvenido a mi blog.";return t};module.exports=e}();
 //# sourceMappingURL=bundle.min.js.map</code></pre>
 
-                    <p>This result, as we can see, is totally different from the original Typescript file. But the magic lies in the fact that from this totally unreadable file and its sourcemap, we can go back and reverse the processes and reach the original file.</p>
+                    <p>This result, as we can see, is totally different from the original Typescript file. But the magic
+                        lies in the fact that from this totally unreadable file and its sourcemap, we can go back and
+                        reverse the processes and reach the original file.</p>
 
                     <h3>Why don't we normally see sourcemap files?</h3>
-                    <p>The build process of an application is not uniform; it adapts according to the deployment environment (that is, what target we have). We do not configure an application running on our computer the same way as one consumed by countless users in production.</p>
-                    <p>For example, in face of an error like a TypeError, in the local environment we need a clear stack trace indicating the original file and the exact line of the error. We also enable debug logs and sacrifice performance optimizations so changes can be reflected instantly. In contrast, in production, the code is transformed to be as lightweight and performant as possible.</p>
-                    <p>This differentiation in the generation of Source Maps and other resources responds to three pillars:</p>
+                    <p>The build process of an application is not uniform; it adapts according to the deployment
+                        environment (that is, what target we have). We do not configure an application running on our
+                        computer the same way as one consumed by countless users in production.</p>
+                    <p>For example, in face of an error like a TypeError, in the local environment we need a clear stack
+                        trace indicating the original file and the exact line of the error. We also enable debug logs
+                        and sacrifice performance optimizations so changes can be reflected instantly. In contrast, in
+                        production, the code is transformed to be as lightweight and performant as possible.</p>
+                    <p>This differentiation in the generation of Source Maps and other resources responds to three
+                        pillars:</p>
                     <ul>
-                        <li><strong>Security:</strong> We avoid exposing business logic and the internal project structure to third parties.</li>
-                        <li><strong>Performance:</strong> We reduce file weight and processing time on the server, eliminating unnecessary metadata for the end user.</li>
-                        <li><strong>Developer Experience (DX):</strong> We facilitate real-time error detection during programming, something that would be impossible with minified code and without reference maps.</li>
+                        <li><strong>Security:</strong> We avoid exposing business logic and the internal project
+                            structure to third parties.</li>
+                        <li><strong>Performance:</strong> We reduce file weight and processing time on the server,
+                            eliminating unnecessary metadata for the end user.</li>
+                        <li><strong>Developer Experience (DX):</strong> We facilitate real-time error detection during
+                            programming, something that would be impossible with minified code and without reference
+                            maps.</li>
                     </ul>
 
-                    <p>Going to an example of sourcemaps, one can specify for example, whether to generate these mapping files or not, depending normally on whether we want our code for a productive environment or not.</p>
-                    <p>Let's go to a case where we have webpack to compile our Typescript files, and we could indicate:</p>
+                    <p>Going to an example of sourcemaps, one can specify for example, whether to generate these mapping
+                        files or not, depending normally on whether we want our code for a productive environment or
+                        not.</p>
+                    <p>Let's go to a case where we have webpack to compile our Typescript files, and we could indicate:
+                    </p>
 
                     <pre><code class="language-javascript">// vite.config.js or webpack.config.js
 export default defineConfig(({ mode }) => {
@@ -183,65 +224,108 @@ export default defineConfig(({ mode }) => {
   };
 });</code></pre>
 
-                    <p>In this way, locally we could debug our application more easily but in production, where we are not interested in these sourcemaps, they were not generated.</p>
+                    <p>In this way, locally we could debug our application more easily but in production, where we are
+                        not interested in these sourcemaps, they were not generated.</p>
 
                     <h3>What happened in the Apple AppStore?</h3>
-                    <p>It seems that some developer or missing configuration, possibly unintentionally, allowed these sourcemaps to be generated, leaving the possibility that the reverse path can be taken and we manage to have the original code in our hands.</p>
-                    <p>In November 2025, the development community was surprised to discover that the web version of the Apple App Store had its Source Maps exposed in production. This allowed anyone, just by opening the developer tools, to navigate through the original source code (TypeScript), read internal engineer comments and understand the application folder structure.</p>
+                    <p>It seems that some developer or missing configuration, possibly unintentionally, allowed these
+                        sourcemaps to be generated, leaving the possibility that the reverse path can be taken and we
+                        manage to have the original code in our hands.</p>
+                    <p>In November 2025, the development community was surprised to discover that the web version of the
+                        Apple App Store had its Source Maps exposed in production. This allowed anyone, just by opening
+                        the developer tools, to navigate through the original source code (TypeScript), read internal
+                        engineer comments and understand the application folder structure.</p>
 
                     <h3>How could this happen?</h3>
-                    <p>Although there is no official report of the exact cause, technical logic points to two usual suspects:</p>
+                    <p>Although there is no official report of the exact cause, technical logic points to two usual
+                        suspects:</p>
                     <ol>
-                        <li><strong>A failure in CI/CD:</strong> Most likely the continuous integration pipeline (where the application is built) did not filter <code>.map</code> files before uploading them to the production CDN. A single forgotten line in a deployment script can cause this.</li>
-                        <li><strong>A bad default configuration:</strong> Many modern packaging tools generate Source Maps automatically. If the engineering team changed tools or updated a version without checking default "target" values.</li>
+                        <li><strong>A failure in CI/CD:</strong> Most likely the continuous integration pipeline (where
+                            the application is built) did not filter <code>.map</code> files before uploading them to
+                            the production CDN. A single forgotten line in a deployment script can cause this.</li>
+                        <li><strong>A bad default configuration:</strong> Many modern packaging tools generate Source
+                            Maps automatically. If the engineering team changed tools or updated a version without
+                            checking default "target" values.</li>
                     </ol>
 
                     <h3>Lessons this event left us</h3>
-                    <p>Not even experts in the field such as Apple engineers are safe from making errors. The Apple event is not a mockery of their technical capacity, but a reminder of humility for the entire industry.</p>
+                    <p>Not even experts in the field such as Apple engineers are safe from making errors. The Apple
+                        event is not a mockery of their technical capacity, but a reminder of humility for the entire
+                        industry.</p>
                     <p>These are the lessons it leaves us:</p>
-                    
+
                     <h4>1. Human error is a constant</h4>
-                    <p>If it happened to engineers at one of the most valuable companies in the world, it can happen to anyone. We must not punish the error, but strengthen systems so the error does not reach the user.</p>
+                    <p>If it happened to engineers at one of the most valuable companies in the world, it can happen to
+                        anyone. We must not punish the error, but strengthen systems so the error does not reach the
+                        user.</p>
 
                     <h4>2. Automation is your best friend (and your worst enemy)</h4>
-                    <p>Automating deployment is vital, but requires constant audits. It is a good practice to add a "cleanup" or verification step at the end of each build confirming that no <code>.map</code> file resides in the public production folder.</p>
+                    <p>Automating deployment is vital, but requires constant audits. It is a good practice to add a
+                        "cleanup" or verification step at the end of each build confirming that no <code>.map</code>
+                        file resides in the public production folder.</p>
 
                     <h4>3. The importance of environments (Targets)</h4>
-                    <p>This case reinforces what we mentioned before: configuration must be explicit. Do not trust default values. Clearly define:</p>
+                    <p>This case reinforces what we mentioned before: configuration must be explicit. Do not trust
+                        default values. Clearly define:</p>
                     <ul>
                         <li><strong>Local:</strong> Full maps.</li>
-                        <li><strong>Production:</strong> Non-existent maps or uploaded exclusively to a private monitoring server (like Sentry).</li>
+                        <li><strong>Production:</strong> Non-existent maps or uploaded exclusively to a private
+                            monitoring server (like Sentry).</li>
                     </ul>
 
                     <h4>4. Tools for "Smoke Test"</h4>
-                    <p>Before considering a deployment finished, perform a "smoke test": try to access a <code>.map</code> file manually from your browser in the production URL. If it loads, something is wrong.</p>
+                    <p>Before considering a deployment finished, perform a "smoke test": try to access a
+                        <code>.map</code> file manually from your browser in the production URL. If it loads, something
+                        is wrong.
+                    </p>
 
                     <h3>Conclusion</h3>
-                    <p>What happened with Apple reminds us that technical excellence does not make us immune to oversight. In a world where transpilation and deployment tools are increasingly complex, a simple <code>.map</code> file can be the difference between protected and exposed code.</p>
-                    <p>Do not view security as a destination, but as a habit. Review your CI/CD processes, question default configurations and, above all, never stop doing a "smoke test" at the end. If the best in the world missed a line in the build script, it can happen to us too. The question is not if we are going to commit an error, but how robust our mechanisms and systems are to detect it before users do.</p>
+                    <p>What happened with Apple reminds us that technical excellence does not make us immune to
+                        oversight. In a world where transpilation and deployment tools are increasingly complex, a
+                        simple <code>.map</code> file can be the difference between protected and exposed code.</p>
+                    <p>Do not view security as a destination, but as a habit. Review your CI/CD processes, question
+                        default configurations and, above all, never stop doing a "smoke test" at the end. If the best
+                        in the world missed a line in the build script, it can happen to us too. The question is not if
+                        we are going to commit an error, but how robust our mechanisms and systems are to detect it
+                        before users do.</p>
                 </div>
 
                 <!-- Spanish Content (Default) -->
                 <div class="article-body" data-lang="es" style="display: none;">
-                    
-                    <p>Una noticia sonó fuerte, y despertó el interés y la curiosidad de toda una comunidad, al enterarse de que el código fuente del frontend de la AppStore de Apple fue filtrado.</p>
+
+                    <p>Una noticia sonó fuerte, y despertó el interés y la curiosidad de toda una comunidad, al
+                        enterarse de que el código fuente del frontend de la AppStore de Apple fue filtrado.</p>
                     <p>Esto nos deja algunas preguntas:</p>
                     <ul>
-                        <li>¿El código frontend no es público de por sí? ¿Por qué podemos afirmar que se ha “filtrado”?</li>
+                        <li>¿El código frontend no es público de por sí? ¿Por qué podemos afirmar que se ha “filtrado”?
+                        </li>
                         <li>¿Qué significa que podamos acceder a los archivos originales en typescript?</li>
                         <li>¿Cómo hemos podido recrear estos archivos?</li>
                     </ul>
-                    <p>A todas estas preguntas y más, vamos a encontrar respuesta y veremos cómo debemos trabajar para que no nos ocurra a nosotros en nuestras aplicaciones productivas.</p>
+                    <p>A todas estas preguntas y más, vamos a encontrar respuesta y veremos cómo debemos trabajar para
+                        que no nos ocurra a nosotros en nuestras aplicaciones productivas.</p>
 
-                    <p>Primero, respondamos a la pregunta de porqué decimos que se ha filtrado el código si realmente el frontend es código servido para los clientes, y por consiguiente, “público”.</p>
-                    <p>Bueno, la respuesta corta, es que si, siempre tenemos acceso al código que se ejecuta en el cliente, sin embargo, esto no significa que ese código sea el código fuente.</p>
+                    <p>Primero, respondamos a la pregunta de porqué decimos que se ha filtrado el código si realmente el
+                        frontend es código servido para los clientes, y por consiguiente, “público”.</p>
+                    <p>Bueno, la respuesta corta, es que si, siempre tenemos acceso al código que se ejecuta en el
+                        cliente, sin embargo, esto no significa que ese código sea el código fuente.</p>
 
                     <h3>¿Qué es un sourcemap?</h3>
-                    <p>Básicamente un sourcemap es un archivo auxiliar en formato JSON (<code>.js.map</code>), que establece un vínculo bidireccional entre el código final que se ejecuta en el navegador (el código transpuesto, empaquetado y/o minificado) y el código fuente original que escribió el desarrollador. Esto nos permite recrear el archivo original, a partir del archivo minificado. Claramente el proceso manual puede tardar mucho, pero hoy en día existen herramientas que nos permiten hacer esto, como puede ser SourceMap-Visualizer (https://bit.ly/sourcemap-visualize), donde subiendo el archivo javascript minificado y el sourcemap podemos ver el archivo ts original, o también podemos crear nuestro propio script para su recreación.</p>
+                    <p>Básicamente un sourcemap es un archivo auxiliar en formato JSON (<code>.js.map</code>), que
+                        establece un vínculo bidireccional entre el código final que se ejecuta en el navegador (el
+                        código transpuesto, empaquetado y/o minificado) y el código fuente original que escribió el
+                        desarrollador. Esto nos permite recrear el archivo original, a partir del archivo minificado.
+                        Claramente el proceso manual puede tardar mucho, pero hoy en día existen herramientas que nos
+                        permiten hacer esto, como puede ser SourceMap-Visualizer (https://bit.ly/sourcemap-visualize),
+                        donde subiendo el archivo javascript minificado y el sourcemap podemos ver el archivo ts
+                        original, o también podemos crear nuestro propio script para su recreación.</p>
 
                     <h3>Un enfoque práctico</h3>
-                    <p>Para que se entienda aún mejor, podemos pasar a una aplicación práctica de cómo funcionan realmente los sourcemaps y como pasa mi código de Typescript a Javascript.</p>
-                    <p>En <a href="https://www.polarsignals.com/blog/posts/2025/11/04/javascript-source-maps-internals" target="_blank">Polarsignals</a> existe un post donde podemos ver de una manera mas amena como funcionan estos pasos, pero aun asi, lo abordaremos para que todos lo podamos entender.</p>
+                    <p>Para que se entienda aún mejor, podemos pasar a una aplicación práctica de cómo funcionan
+                        realmente los sourcemaps y como pasa mi código de Typescript a Javascript.</p>
+                    <p>En <a href="https://www.polarsignals.com/blog/posts/2025/11/04/javascript-source-maps-internals"
+                            target="_blank">Polarsignals</a> existe un post donde podemos ver de una manera mas amena
+                        como funcionan estos pasos, pero aun asi, lo abordaremos para que todos lo podamos entender.</p>
 
                     <p>Miremos por ejemplo el código de ejemplo de una aplicación simple en Typescript:</p>
 
@@ -257,9 +341,13 @@ function createGreeting(name: string): string {
 }
 export default createGreeting;</code></pre>
 
-                    <p>En esta etapa del código fuente, aún no contamos con sourcemaps, dado que aún no tenemos necesidad de mapear absolutamente nada.</p>
+                    <p>En esta etapa del código fuente, aún no contamos con sourcemaps, dado que aún no tenemos
+                        necesidad de mapear absolutamente nada.</p>
 
-                    <p>Luego, para que nuestro archivo Typescript sea ejecutable por un navegador, necesitamos que sea de tipo Javascript. Typescript, realmente funciona como una máscara de Javascript, que mejora la experiencia de desarrollo de aplicaciones web (tema para otro post 😉). Por lo cual, pasamos a un código Javascript, en el proceso de transpilación, y el resultado seria el siguiente:</p>
+                    <p>Luego, para que nuestro archivo Typescript sea ejecutable por un navegador, necesitamos que sea
+                        de tipo Javascript. Typescript, realmente funciona como una máscara de Javascript, que mejora la
+                        experiencia de desarrollo de aplicaciones web (tema para otro post 😉). Por lo cual, pasamos a
+                        un código Javascript, en el proceso de transpilación, y el resultado seria el siguiente:</p>
 
                     <pre><code class="language-javascript">// dist/greeting.js
 /**
@@ -275,9 +363,15 @@ function createGreeting(name) {
 module.exports = createGreeting;
 //# sourceMappingURL=greeting.js.map</code></pre>
 
-                    <p>El comentario al final (<code>//# sourceMappingURL=greeting.js.map</code>) es la línea directiva que le dice a la herramienta de depuración dónde encontrar el Source Map del Transpilado (<code>.js.map</code>). Este archivo JSON mapea las líneas y columnas del <code>./dist/greeting.js</code> de vuelta a las líneas y columnas del <code>./src/greeting.ts</code>.</p>
+                    <p>El comentario al final (<code>//# sourceMappingURL=greeting.js.map</code>) es la línea directiva
+                        que le dice a la herramienta de depuración dónde encontrar el Source Map del Transpilado
+                        (<code>.js.map</code>). Este archivo JSON mapea las líneas y columnas del
+                        <code>./dist/greeting.js</code> de vuelta a las líneas y columnas del
+                        <code>./src/greeting.ts</code>.
+                    </p>
 
-                    <p>Y ahora que ya tenemos un archivo javascript, deberíamos poder visualizar el archivo autogenerado por nuestra herramienta de transpilado, con formato JSON:</p>
+                    <p>Y ahora que ya tenemos un archivo javascript, deberíamos poder visualizar el archivo autogenerado
+                        por nuestra herramienta de transpilado, con formato JSON:</p>
 
                     <pre><code class="language-json">// dist/greeting.js.map
 {
@@ -300,27 +394,46 @@ module.exports = createGreeting;
   "mappings": "AAKA,SAASA,cAAgBC,MAAW;IAChC,IAAIC,QAAO,GAAG,SAAO,GAAG,GAAGD,IAAI,GAAG,gCAAgC;IACrE,OAAOC,QAAQ;AACnB;AAGA;AACAC,OAAOC,OAAO,GAAGJ,cAAc"
 }</code></pre>
 
-                    <p>Aquí es donde ocurre la magia del mapeo, concretamente tenemos los nombres de la función y sus respectivos mappings. Luego, el siguiente paso es el de la creación del bundle, proceso por el cual se empaqueta el código en un único archivo bundle.js y por último, por motivos para optimizar el tamaño del bundle y su eficiencia, se utilizan scripts de minificado, que reducen significativamente el tamaño del archivo y por consiguiente, mejora la performance general.</p>
+                    <p>Aquí es donde ocurre la magia del mapeo, concretamente tenemos los nombres de la función y sus
+                        respectivos mappings. Luego, el siguiente paso es el de la creación del bundle, proceso por el
+                        cual se empaqueta el código en un único archivo bundle.js y por último, por motivos para
+                        optimizar el tamaño del bundle y su eficiencia, se utilizan scripts de minificado, que reducen
+                        significativamente el tamaño del archivo y por consiguiente, mejora la performance general.</p>
                     <p>Esto nos da como salida el siguiente javascript:</p>
 
                     <pre><code class="language-javascript">// dist/bundle.min.js
 !function(){var e=function(e){var t="¡Hola, "+e+"! Bienvenido a mi blog.";return t};module.exports=e}();
 //# sourceMappingURL=bundle.min.js.map</code></pre>
 
-                    <p>Este resultado, como podemos ver, es totalmente diferente al archivo original en Typescript. Pero la magia radica en que desde este archivo totalmente ilegible y su sourcemap, podemos volver y retroceder los procesos y llegar al archivo original.</p>
+                    <p>Este resultado, como podemos ver, es totalmente diferente al archivo original en Typescript. Pero
+                        la magia radica en que desde este archivo totalmente ilegible y su sourcemap, podemos volver y
+                        retroceder los procesos y llegar al archivo original.</p>
 
                     <h3>¿Por qué normalmente no vemos los archivos sourcemaps?</h3>
-                    <p>El proceso de build de una aplicación no es uniforme; se adapta según el entorno de despliegue (es decir, que target tenemos). No configuramos igual una aplicación que corre en nuestra computadora que una que consumen infinidad de usuarios en producción.</p>
-                    <p>Por ejemplo, ante un error como un TypeError, en el entorno local necesitamos un stack trace claro que nos indique el archivo original y la línea exacta del error. También habilitamos logs de depuración y sacrificamos optimizaciones de rendimiento para que los cambios se puedan reflejar instantáneamente. En cambio, en producción, el código se transforma para ser lo más liviano y performante posible.</p>
+                    <p>El proceso de build de una aplicación no es uniforme; se adapta según el entorno de despliegue
+                        (es decir, que target tenemos). No configuramos igual una aplicación que corre en nuestra
+                        computadora que una que consumen infinidad de usuarios en producción.</p>
+                    <p>Por ejemplo, ante un error como un TypeError, en el entorno local necesitamos un stack trace
+                        claro que nos indique el archivo original y la línea exacta del error. También habilitamos logs
+                        de depuración y sacrificamos optimizaciones de rendimiento para que los cambios se puedan
+                        reflejar instantáneamente. En cambio, en producción, el código se transforma para ser lo más
+                        liviano y performante posible.</p>
                     <p>Esta diferenciación en la generación de Source Maps y otros recursos responde a tres pilares:</p>
                     <ul>
-                        <li><strong>Seguridad:</strong> Evitamos exponer la lógica de negocio y la estructura interna del proyecto a terceros.</li>
-                        <li><strong>Rendimiento:</strong> Reducimos el peso de los archivos y el tiempo de procesamiento en el servidor, eliminando metadatos innecesarios para el usuario final.</li>
-                        <li><strong>Experiencia de Desarrollo (DX):</strong> Facilitamos la detección de errores en tiempo real durante la programación, algo que sería imposible con un código minificado y sin mapas de referencia.</li>
+                        <li><strong>Seguridad:</strong> Evitamos exponer la lógica de negocio y la estructura interna
+                            del proyecto a terceros.</li>
+                        <li><strong>Rendimiento:</strong> Reducimos el peso de los archivos y el tiempo de procesamiento
+                            en el servidor, eliminando metadatos innecesarios para el usuario final.</li>
+                        <li><strong>Experiencia de Desarrollo (DX):</strong> Facilitamos la detección de errores en
+                            tiempo real durante la programación, algo que sería imposible con un código minificado y sin
+                            mapas de referencia.</li>
                     </ul>
 
-                    <p>Yendo a un ejemplo de los sourcemaps, se puede especificar por ejemplo, que se generen estos archivos de mapeo o no, dependiendo normalmente de si queremos nuestro código para un entorno productivo o no.</p>
-                    <p>Vamos a un caso donde tenemos webpack para compilar nuestros archivos Typescript, y podríamos indicar:</p>
+                    <p>Yendo a un ejemplo de los sourcemaps, se puede especificar por ejemplo, que se generen estos
+                        archivos de mapeo o no, dependiendo normalmente de si queremos nuestro código para un entorno
+                        productivo o no.</p>
+                    <p>Vamos a un caso donde tenemos webpack para compilar nuestros archivos Typescript, y podríamos
+                        indicar:</p>
 
                     <pre><code class="language-javascript">// vite.config.js o webpack.config.js
 export default defineConfig(({ mode }) => {
@@ -333,42 +446,73 @@ export default defineConfig(({ mode }) => {
   };
 });</code></pre>
 
-                    <p>De esta forma, en local podríamos debuggear nuestra aplicación de manera más sencilla pero en producción, donde no nos interesan estos sourcemaps, no se generaron.</p>
+                    <p>De esta forma, en local podríamos debuggear nuestra aplicación de manera más sencilla pero en
+                        producción, donde no nos interesan estos sourcemaps, no se generaron.</p>
 
                     <h3>¿Que paso en la AppStore de Apple?</h3>
-                    <p>Parece ser que algún desarrollador o configuración faltante, posiblemente de manera no intencional, ha permitido que se generen estos sourcemaps, dejando la posibilidad, de que se pueda hacer el camino inverso y consigamos tener el código original en nuestras manos.</p>
-                    <p>En Noviembre de 2025, la comunidad de desarrollo se sorprendió al descubrir que la versión web de la Apple App Store tenía sus Source Maps expuestos en producción. Esto permitió que cualquier persona, con solo abrir las herramientas de desarrollador, pudiera navegar por el código fuente original (TypeScript), leer comentarios internos de los ingenieros y entender la estructura de carpetas de la aplicación.</p>
+                    <p>Parece ser que algún desarrollador o configuración faltante, posiblemente de manera no
+                        intencional, ha permitido que se generen estos sourcemaps, dejando la posibilidad, de que se
+                        pueda hacer el camino inverso y consigamos tener el código original en nuestras manos.</p>
+                    <p>En Noviembre de 2025, la comunidad de desarrollo se sorprendió al descubrir que la versión web de
+                        la Apple App Store tenía sus Source Maps expuestos en producción. Esto permitió que cualquier
+                        persona, con solo abrir las herramientas de desarrollador, pudiera navegar por el código fuente
+                        original (TypeScript), leer comentarios internos de los ingenieros y entender la estructura de
+                        carpetas de la aplicación.</p>
 
                     <h3>¿Cómo pudo suceder esto?</h3>
-                    <p>Aunque no hay un reporte oficial de la causa exacta, la lógica técnica apunta a dos sospechosos habituales;</p>
+                    <p>Aunque no hay un reporte oficial de la causa exacta, la lógica técnica apunta a dos sospechosos
+                        habituales;</p>
                     <ol>
-                        <li><strong>Un fallo en el CI/CD:</strong> Lo más probable es que el pipeline de integración continua (donde se construye la aplicación) no filtró los archivos <code>.map</code> antes de subirlos al CDN de producción. Una sola línea olvidada en un script de despliegue puede causar esto.</li>
-                        <li><strong>Una mala configuración por defecto:</strong> Muchas herramientas de empaquetado modernas generan Source Maps de forma automática. Si el equipo de ingeniería cambió de herramienta o actualizó una versión sin revisar los valores por defecto del nuevo "target".</li>
+                        <li><strong>Un fallo en el CI/CD:</strong> Lo más probable es que el pipeline de integración
+                            continua (donde se construye la aplicación) no filtró los archivos <code>.map</code> antes
+                            de subirlos al CDN de producción. Una sola línea olvidada en un script de despliegue puede
+                            causar esto.</li>
+                        <li><strong>Una mala configuración por defecto:</strong> Muchas herramientas de empaquetado
+                            modernas generan Source Maps de forma automática. Si el equipo de ingeniería cambió de
+                            herramienta o actualizó una versión sin revisar los valores por defecto del nuevo "target".
+                        </li>
                     </ol>
 
                     <h3>Enseñanzas que nos dejó este suceso</h3>
-                    <p>Ni siquiera expertos en la materia como pueden ser los ingenieros de Apple, están a salvo de cometer errores. El suceso de Apple no es una burla a su capacidad técnica, sino un recordatorio de humildad para toda la industria.</p>
+                    <p>Ni siquiera expertos en la materia como pueden ser los ingenieros de Apple, están a salvo de
+                        cometer errores. El suceso de Apple no es una burla a su capacidad técnica, sino un recordatorio
+                        de humildad para toda la industria.</p>
                     <p>Estas son las enseñanzas que nos deja:</p>
 
                     <h4>1. El error humano es una constante</h4>
-                    <p>Si le pasó a los ingenieros de una de las empresas más valiosas del mundo, nos puede pasar a cualquiera. No debemos castigar el error, sino robustecer los sistemas para que el error no llegue al usuario.</p>
+                    <p>Si le pasó a los ingenieros de una de las empresas más valiosas del mundo, nos puede pasar a
+                        cualquiera. No debemos castigar el error, sino robustecer los sistemas para que el error no
+                        llegue al usuario.</p>
 
                     <h4>2. La automatización es tu mejor amiga (y tu peor enemiga)</h4>
-                    <p>Automatizar el despliegue es vital, pero requiere auditorías constantes. Es una buena práctica añadir un paso de "limpieza" o verificación al final de cada build que confirme que ningún archivo <code>.map</code> reside en la carpeta pública de producción.</p>
+                    <p>Automatizar el despliegue es vital, pero requiere auditorías constantes. Es una buena práctica
+                        añadir un paso de "limpieza" o verificación al final de cada build que confirme que ningún
+                        archivo <code>.map</code> reside en la carpeta pública de producción.</p>
 
                     <h4>3. La importancia de los entornos (Targets)</h4>
-                    <p>Este caso refuerza lo que mencionamos antes: la configuración debe ser explícita. No confíes en los valores por defecto. Define claramente:</p>
+                    <p>Este caso refuerza lo que mencionamos antes: la configuración debe ser explícita. No confíes en
+                        los valores por defecto. Define claramente:</p>
                     <ul>
                         <li><strong>Local:</strong> Mapas completos.</li>
-                        <li><strong>Producción:</strong> Mapas inexistentes o subidos exclusivamente a un servidor privado de monitoreo (como Sentry).</li>
+                        <li><strong>Producción:</strong> Mapas inexistentes o subidos exclusivamente a un servidor
+                            privado de monitoreo (como Sentry).</li>
                     </ul>
 
                     <h4>4. Herramientas para "Smoke Test"</h4>
-                    <p>Antes de dar por finalizado un despliegue, realiza un "test de humo" mejor conocido en inglés como “smoke test”: intenta acceder manualmente a un archivo <code>.map</code> desde tu navegador en la URL de producción. Si carga, algo anda mal.</p>
+                    <p>Antes de dar por finalizado un despliegue, realiza un "test de humo" mejor conocido en inglés
+                        como “smoke test”: intenta acceder manualmente a un archivo <code>.map</code> desde tu navegador
+                        en la URL de producción. Si carga, algo anda mal.</p>
 
                     <h3>Conclusión</h3>
-                    <p>Lo ocurrido con Apple nos recuerda que la excelencia técnica no nos hace inmunes al descuido. En un mundo donde las herramientas de transpilación y despliegue son cada vez más complejas, un simple archivo <code>.map</code> puede ser la diferencia entre un código protegido y uno expuesto.</p>
-                    <p>No veas la seguridad como un destino, sino como un hábito. Revisa tus procesos de CI/CD, cuestiona las configuraciones por defecto y, sobre todo, nunca dejar de hacer un "smoke test" al final. Si a los mejores del mundo se les escapó una línea en el script de build, a nosotros también nos puede pasar. La pregunta no es si vamos a cometer un error, sino qué tan robustos son nuestros mecanismos y sistemas para detectarlo antes que los usuarios.</p>
+                    <p>Lo ocurrido con Apple nos recuerda que la excelencia técnica no nos hace inmunes al descuido. En
+                        un mundo donde las herramientas de transpilación y despliegue son cada vez más complejas, un
+                        simple archivo <code>.map</code> puede ser la diferencia entre un código protegido y uno
+                        expuesto.</p>
+                    <p>No veas la seguridad como un destino, sino como un hábito. Revisa tus procesos de CI/CD,
+                        cuestiona las configuraciones por defecto y, sobre todo, nunca dejar de hacer un "smoke test" al
+                        final. Si a los mejores del mundo se les escapó una línea en el script de build, a nosotros
+                        también nos puede pasar. La pregunta no es si vamos a cometer un error, sino qué tan robustos
+                        son nuestros mecanismos y sistemas para detectarlo antes que los usuarios.</p>
 
                 </div>
 
