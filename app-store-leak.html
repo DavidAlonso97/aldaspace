@@ -96,7 +96,7 @@
                         bundled, and/or minified code) and the original source code written by the developer. This
                         allows us to recreate the original file from the minified file. Clearly, the manual process can
                         take a long time, but today there are tools that allow us to do this, such as
-                        SourceMap-Visualizer (https://bit.ly/sourcemap-visualize), where by uploading the minified
+                        <a href="https://bit.ly/sourcemap-visualize">SourceMap-Visualizer</a>, where by uploading the minified
                         javascript file and the sourcemap we can see the original ts file, or we can also create our own
                         script for its recreation.</p>
 
@@ -116,7 +116,7 @@
  * @returns A personalized greeting.
  */
 function createGreeting(name: string): string {
-    const message = `¡Hola, ${name}! Bienvenido a mi blog.`;
+    const message = `Hi, ${name}! Welcome to my blog.`;
     return message;
 }
 export default createGreeting;</code></pre>
@@ -136,7 +136,7 @@ export default createGreeting;</code></pre>
  * @returns A personalized greeting.
  */
 function createGreeting(name) {
-    var message = "¡Hola, " + name + "! Bienvenido a mi blog.";
+    var message = "Hi, " + name + "! Welcome to my blog.";
     return message;
 }
 // Added for simple compatibility with CommonJS/modules
@@ -160,7 +160,7 @@ module.exports = createGreeting;
     "../src/greeting.ts" // Original source file
   ],
   "sourcesContent": [
-    "// src/greeting.ts\r\n/**\r\n * Saluda a una persona usando su nombre.\r\n * @param name El nombre de la persona a saludar.\r\n * @returns Un saludo personalizado.\r\n */\r\nfunction createGreeting(name: string): string {\r\n    const message = `¡Hola, ${name}! Bienvenido a mi blog.`;\r\n    return message;\r\n}\r\n\r\n// Exportamos la función para usarla en otro lugar\r\nexport default createGreeting;"
+    "// src/greeting.ts\r\n/**\r\n * Greets a person using their name.\r\n * @param name The name of the person to greet.\r\n * @returns A personalized greeting.\r\n */\r\nfunction createGreeting(name: string): string {\r\n    const message = `Hi, ${name}! Welcome to my blog.`;\r\n    return message;\r\n}\r\n\r\n// export default createGreeting;"
   ],
   "names": [
     "createGreeting",
@@ -180,7 +180,7 @@ module.exports = createGreeting;
                     <p>This gives us the following javascript as output:</p>
 
                     <pre><code class="language-javascript">// dist/bundle.min.js
-!function(){var e=function(e){var t="¡Hola, "+e+"! Bienvenido a mi blog.";return t};module.exports=e}();
+!function(){var e=function(e){var t="Hi, "+e+"! Welcome to my blog.";return t};module.exports=e}();
 //# sourceMappingURL=bundle.min.js.map</code></pre>
 
                     <p>This result, as we can see, is totally different from the original Typescript file. But the magic
@@ -316,7 +316,7 @@ export default defineConfig(({ mode }) => {
                         código transpuesto, empaquetado y/o minificado) y el código fuente original que escribió el
                         desarrollador. Esto nos permite recrear el archivo original, a partir del archivo minificado.
                         Claramente el proceso manual puede tardar mucho, pero hoy en día existen herramientas que nos
-                        permiten hacer esto, como puede ser SourceMap-Visualizer (https://bit.ly/sourcemap-visualize),
+                        permiten hacer esto, como puede ser <a href="https://bit.ly/sourcemap-visualize">SourceMap-Visualizer</a>,
                         donde subiendo el archivo javascript minificado y el sourcemap podemos ver el archivo ts
                         original, o también podemos crear nuestro propio script para su recreación.</p>
 
@@ -382,7 +382,7 @@ module.exports = createGreeting;
     "../src/greeting.ts" // Archivo fuente original
   ],
   "sourcesContent": [
-    "// src/greeting.ts\r\n/**\r\n * Saluda a una persona usando su nombre.\r\n * @param name El nombre de la persona a saludar.\r\n * @returns Un saludo personalizado.\r\n */\r\nfunction createGreeting(name: string): string {\r\n    const message = `¡Hola, ${name}! Bienvenido a mi blog.`;\r\n    return message;\r\n}\r\n\r\n// Exportamos la función para usarla en otro lugar\r\nexport default createGreeting;"
+    "// src/greeting.ts\r\n/**\r\n * Saluda a una persona usando su nombre.\r\n * @param name El nombre de la persona a saludar.\r\n * @returns Un saludo personalizado.\r\n */\r\nfunction createGreeting(name: string): string {\r\n    const message = `¡Hola, ${name}! Bienvenido a mi blog.`;\r\n    return message;\r\n}\r\n\r\n// export default createGreeting;"
   ],
   "names": [
     "createGreeting",
